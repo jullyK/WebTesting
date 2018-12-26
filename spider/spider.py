@@ -11,8 +11,13 @@ def extract_links_from(url):
 
 
 target_url = "10.0.2.9/mutillidae/"
+target_links = []
+
 href_links = extract_links_from("http://" + target_url)
 for link in href_links:
     link = urlparse.urljoin("http://" + target_url, link)
-    if target_url in link:
-        print link
+    if "#" in link:
+        link = link.split("#")[0]
+    if target_url in link and link not in target_links:
+        target_links.append(link)
+        print(link)
